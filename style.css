@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+/* https://radiatingstar.com/blog/distribute-divs-images-equaly-line/
+
+https://www.google.com/search?q=css+separate+items+horizontal&biw=1920&bih=927&sxsrf=ALiCzsYRorH-JedOgAlAABvymfTBJXPt1g%3A1658340699687&ei=W0XYYu6aKda8xc8PquG6oAo&ved=0ahUKEwiutMjCiIj5AhVWXvEDHaqwDqQQ4dUDCA0&uact=5&oq=css+separate+items+horizontal&gs_lcp=Cgdnd3Mtd2l6EAMyBAghEBU6BwgAEEcQsAM6BwgjELACECc6BAgjECdKBAhBGABKBAhGGABQhg5YoiJgnjRoAXABeACAAbACiAHVCpIBBzAuOC4wLjGYAQCgAQHIAQi4AQPAAQE&sclient=gws-wiz */
+
+
+body {
+    font-family: 'Press Start 2P';
+    color: #eee;
+    background-color: #221;   
+}
+
+.button {    
+    font-family: inherit;  
+    margin-top: 20px;
+    margin-bottom: 20px;  
+    padding: 10px;
+    border-radius: 0.5rem;
+    cursor: pointer;    
+    margin-left:5%;
+    margin-right:5%;  
+    width: 20%;
+}
+
+#buttonContainer{
+    margin: auto;
+    width: 50%;
+    /* border: 3px solid green; */
+    /* padding: auto; */
+    /* display: flex; */
+
+    /* width: 30%; */
+
+}
+
+#startButton {
+  
+}
+
+#splitButton {
+
+}
+
+#resetButton {
+  
+}
+
+.horizontalLine {
+    border: 1px solid white;
+    margin: auto;
+}
+
+.stopWatchDisplay {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;    
+    border: 2px solid white;
+    border-radius: 10px;
+    width: 50%;
+    margin-top: 3%;
+    margin-left: 25%;
+    margin-bottom: 2%;
+    font-size: 120%;
+}
