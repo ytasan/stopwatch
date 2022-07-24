@@ -4,9 +4,15 @@
 
 document.querySelector('#startButton').addEventListener('click', function() { 
 
-    let startTime = Date.now(); 
-    
+    let startButtonText = document.querySelector("#startButton");
 
+    if (startButtonText.innerHTML === "Start") {
+        startButtonText.innerHTML = "Pause";
+    } else {
+        startButtonText.innerHTML = "Start";
+    }
+
+    let startTime = Date.now(); 
 
     setInterval( () => {
         let passedTime = Date.now() - startTime;
