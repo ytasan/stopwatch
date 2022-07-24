@@ -1,36 +1,26 @@
-// mode = 0 - not started  
-// mode = 1 - paused  
-// mode = 2 - running
-let mode = 0;
+// todo = yazdirilan zaman degerinin soldan saga kaymasi - sebebi: milisaniye degerinin basamak sayisinin degismesi 
+
+
 
 document.querySelector('#startButton').addEventListener('click', function() { 
-    mode = 2; // runnnig 
-    // let startTime = Date.now(); 
-    // let passedTime = Date.now() - startTime; 
 
-    // document.querySelector('.stopWatchDisplay').textContent = "asd";
+    let startTime = Date.now(); 
+    
+
 
     setInterval( () => {
-        document.querySelector('.stopWatchDisplay').textContent = Date.now();
-        
+        let passedTime = Date.now() - startTime;
+        let passedTimeMiliSecond = passedTime%1000;
+        let passedTimeSecond = (Math.floor((passedTime/1000)%1000)%60);
+        let passedTimeMinute = Math.floor((((passedTime/60)/1000)%1000)%60);
+        let passedTimeHour = Math.floor(((((passedTime/60)/60)/1000)%1000)%60);
+
+        document.querySelector('.stopWatchDisplay').textContent = `${passedTimeHour}:${passedTimeMinute}:${passedTimeSecond}.${passedTimeMiliSecond}`;        
     },1);
 
-    // mode = 2 - running
-    if (mode === 2) {
-        document.querySelector('#startButton').textContent = "Pause";                
-        mode = 1; // mode = 1 - paused  
-        console.log(`if mode === 2 icindeyiz, mode = ${mode}`);
-    }
 
-    document.querySelector('#startButton').addEventListener('click', function() {
-        // mode = 1 - paused
-        if (mode === 1) {        
-            document.querySelector('#startButton').textContent = "Start";        
-            mode = 2; // mode = 2 - running  
-            console.log(`if mode === 1 icindeyiz, mode = ${mode}`);
-        }
-    });
 
 
 });
+
 
