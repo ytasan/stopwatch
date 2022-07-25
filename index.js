@@ -1,52 +1,54 @@
-// todo = yazdirilan zaman degerinin soldan saga kaymasi - sebebi: milisaniye degerinin basamak sayisinin degismesi 
-
+// todo: problem! = alignment of counting text - digits!
 // todo: pop up "are you sure?" for reset button 
-// document.querySelector('#splitbutton').addEventListener('click', function() {
-//     console.log("split button pressed");
-// });
+// todo: reset on reset button
+// todo: enable/disable split & reset buttons
+// todo: problem! - reset on start button
+// done: stop counting on pause
+// todo: log for pause button - pause = split + pause
+// todo: log for split button 
+// todo: cursor change on disabled buttons
+let passedTime;
+let passedTimeMiliSecond; 
+let passedTimeSecond; 
+let passedTimeMinute;
+let passedTimeHour;
+let startTime; 
 
-// todo: pause durumunda saymanin durdurulmasi 
-// todo: pause log'unun yazdirilmasi - pause tusu hem split hem pause anlamina geliyor. 
-// todo: split log'unun yazdirilmasi
+const startButtonElement = document.getElementById("startButton");
+const  pauseButtonElement = document.getElementById("pauseButton");
+const splitButtonElement = document.getElementById("splitButton");
+const resetButtonElement = document.getElementById("resetButton");
+const stopWatchDisplayElement = document.querySelector(".stopWatchDisplay");
 
-let startButtonText = document.querySelector("#startButton");
-let splitButton = document.querySelector("#splitButton");
-let resetButton = document.querySelector("#resetButton");
-splitButton.disabled = true;
-resetButton.disabled = true;
+splitButtonElement.disabled = true;
+resetButtonElement.disabled = true;
 
-let startButtonClickCounter = 0;
+let timerInterval = 0;
 
-document.querySelector('#startButton').addEventListener('click', function() { 
+startButtonElement.addEventListener('click', () => { 
+    startTime = Date.now(); 
 
-    startButtonClickCounter++;
+    startButtonElement.classList.add("hidden");
+    pauseButtonElement.classList.remove("hidden");
 
-    if (startButtonText.innerHTML === "Start") {
-        startButtonText.innerHTML = "Pause";
-        splitButton.disabled = false;
-    } else {
-        startButtonText.innerHTML = "Start";
-        splitButton.disabled = true;
-    }
+    timerInterval = setInterval( () => {
+        passedTime = Date.now() - startTime;
 
-    if ((startButtonClickCounter >= 1) && (startButtonText.innerHTML === "Start")) {
-        resetButton.disabled = false;
-    } else {
-        resetButton.disabled = true;
-    }
+        passedTimeMiliSecond = passedTime%999;
+        passedTimeSecond = Math.floor((passedTime/999)%1000)%60;
+        passedTimeMinute = Math.floor((((passedTime/59)/1000)%1000)%60);
+        passedTimeHour = Math.floor(((((passedTime/59)/60)/1000)%1000)%60);
 
-    let startTime = Date.now(); 
-
-    setInterval( () => {
-        let passedTime = Date.now() - startTime;
-        let passedTimeMiliSecond = passedTime%999;
-        let passedTimeSecond = Math.floor((passedTime/999)%1000)%60;
-        let passedTimeMinute = Math.floor((((passedTime/59)/1000)%1000)%60);
-        let passedTimeHour = Math.floor(((((passedTime/59)/60)/1000)%1000)%60);
-
-        document.querySelector('.stopWatchDisplay').textContent = `${passedTimeHour}:${passedTimeMinute}:${passedTimeSecond}.${passedTimeMiliSecond}`;        
+        stopWatchDisplayElement.textContent = `${passedTimeHour}:${passedTimeMinute}:${passedTimeSecond}.${passedTimeMiliSecond}`;        
     },1);
-
-
 });
- 
+
+resetButtonElement.addEventListener('click', () => {
+    // clearInterval(timerInterval);
+});
+
+pauseButtonElement.addEventListener('click', () => {
+    clearInterval(timerInterval);    
+    startButtonElement.classList.remove("hidden");
+    pauseButtonElement.classList.add("hidden");
+});
