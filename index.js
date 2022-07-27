@@ -15,7 +15,7 @@ let passedTimeHour;
 let startTime; 
 
 const startButtonElement = document.getElementById("startButton");
-const  pauseButtonElement = document.getElementById("pauseButton");
+const pauseButtonElement = document.getElementById("pauseButton");
 const splitButtonElement = document.getElementById("splitButton");
 const resetButtonElement = document.getElementById("resetButton");
 const stopWatchDisplayElement = document.querySelector(".stopWatchDisplay");
@@ -44,11 +44,11 @@ startButtonElement.addEventListener('click', () => {
 });
 
 resetButtonElement.addEventListener('click', () => {
-    // clearInterval(timerInterval);
+    clearInterval(timerInterval);
 });
 
 pauseButtonElement.addEventListener('click', () => {
-    clearInterval(timerInterval);    
     startButtonElement.classList.remove("hidden");
     pauseButtonElement.classList.add("hidden");
+    clearInterval(timerInterval);    
 });
