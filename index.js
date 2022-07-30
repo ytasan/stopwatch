@@ -1,13 +1,13 @@
-// todo: problem! = alignment of counting text - digits!
-// todo: pop up "are you sure?" for reset button 
-// todo: reset on reset button
-// todo: enable/disable split & reset buttons
 // done: problem! - reset on start button
 // done: stop counting on pause
+// done: enable/disable buttons
+// done: reset on reset button
+// todo: problem! = alignment of counting text - digits!
+// todo: pop up "are you sure?" for reset button 
+// todo: enable/disable split & reset buttons
 // todo: log for pause button - pause = split + pause
 // todo: log for split button 
 // todo: cursor change on disabled buttons
-// done: enable/disable buttons
 let passedTime;
 let passedTimeMiliSecond; 
 let passedTimeSecond; 
@@ -26,6 +26,7 @@ resetButtonElement.disabled = true;
 
 let timerInterval = 0;
 let pauseFlag = false;
+let resetFlag = false;
 let passedTimeTemp;
 
 startButtonElement.addEventListener('click', () => { 
@@ -42,7 +43,8 @@ startButtonElement.addEventListener('click', () => {
     timerInterval = setInterval( () => {
         if(pauseFlag){
             passedTime = Date.now() - startTime + passedTimeTemp;
-        } else {
+        } 
+        if((resetFlag === false) && (pauseFlag === false)){
             passedTime = Date.now() - startTime;
         }
 
@@ -57,6 +59,9 @@ startButtonElement.addEventListener('click', () => {
 
 resetButtonElement.addEventListener('click', () => {
     clearInterval(timerInterval);
+    resetFlag = true;
+    passedTimeTemp = 0;
+    stopWatchDisplayElement.textContent = `00:00:00.000`;        
 });
 
 pauseButtonElement.addEventListener('click', () => {
