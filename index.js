@@ -7,7 +7,7 @@
 // todo: log for pause button - pause = split + pause
 // todo: log for split button 
 // todo: cursor change on disabled buttons
-// todo: enable/disable buttons
+// done: enable/disable buttons
 let passedTime;
 let passedTimeMiliSecond; 
 let passedTimeSecond; 
@@ -33,6 +33,11 @@ startButtonElement.addEventListener('click', () => {
 
     startButtonElement.classList.add("hidden");
     pauseButtonElement.classList.remove("hidden");
+
+    if(startButtonElement.classList.contains("hidden")){
+        splitButtonElement.disabled = false;
+        resetButtonElement.disabled = true;
+    }
 
     timerInterval = setInterval( () => {
         if(pauseFlag){
@@ -60,4 +65,9 @@ pauseButtonElement.addEventListener('click', () => {
     clearInterval(timerInterval);    
     pauseFlag = true;
     passedTimeTemp = passedTime;
+
+    if(pauseButtonElement.classList.contains("hidden")){
+        splitButtonElement.disabled = true;
+        resetButtonElement.disabled = false; 
+    }
 });
