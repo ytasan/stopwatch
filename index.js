@@ -2,11 +2,12 @@
 // todo: pop up "are you sure?" for reset button 
 // todo: reset on reset button
 // todo: enable/disable split & reset buttons
-// todo: problem! - reset on start button
+// done: problem! - reset on start button
 // done: stop counting on pause
 // todo: log for pause button - pause = split + pause
 // todo: log for split button 
 // todo: cursor change on disabled buttons
+// todo: enable/disable buttons
 let passedTime;
 let passedTimeMiliSecond; 
 let passedTimeSecond; 
@@ -24,6 +25,8 @@ splitButtonElement.disabled = true;
 resetButtonElement.disabled = true;
 
 let timerInterval = 0;
+let pauseFlag = false;
+let passedTimeTemp;
 
 startButtonElement.addEventListener('click', () => { 
     startTime = Date.now(); 
@@ -32,7 +35,11 @@ startButtonElement.addEventListener('click', () => {
     pauseButtonElement.classList.remove("hidden");
 
     timerInterval = setInterval( () => {
-        passedTime = Date.now() - startTime;
+        if(pauseFlag){
+            passedTime = Date.now() - startTime + passedTimeTemp;
+        } else {
+            passedTime = Date.now() - startTime;
+        }
 
         passedTimeMiliSecond = passedTime%999;
         passedTimeSecond = Math.floor((passedTime/999)%1000)%60;
@@ -51,4 +58,6 @@ pauseButtonElement.addEventListener('click', () => {
     startButtonElement.classList.remove("hidden");
     pauseButtonElement.classList.add("hidden");
     clearInterval(timerInterval);    
+    pauseFlag = true;
+    passedTimeTemp = passedTime;
 });
