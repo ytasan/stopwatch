@@ -1,13 +1,3 @@
-// done: problem! - reset on start button
-// done: stop counting on pause
-// done: enable/disable buttons
-// done: reset on reset button
-// done: problem! = alignment of counting text - digits!
-// todo: pop up "are you sure?" for reset button 
-// todo: enable/disable split & reset buttons
-// todo: log for pause button - pause = split + pause
-// todo: log for split button 
-// todo: cursor change on disabled buttons
 let passedTime;
 let passedTimeMillisecond; 
 let passedTimeSecond; 
@@ -20,6 +10,7 @@ const pauseButtonElement = document.getElementById("pauseButton");
 const splitButtonElement = document.getElementById("splitButton");
 const resetButtonElement = document.getElementById("resetButton");
 const stopWatchDisplayElement = document.querySelector(".stopWatchDisplay");
+const logsElement = document.querySelector(".logs");
 
 splitButtonElement.disabled = true;
 resetButtonElement.disabled = true;
@@ -48,36 +39,20 @@ startButtonElement.addEventListener('click', () => {
             passedTime = Date.now() - startTime;
         }
 
-        passedTimeMillisecond = passedTime%999;
-        passedTimeSecond = Math.floor((passedTime/999)%1000)%60;
-        passedTimeMinute = Math.floor((((passedTime/59)/1000)%1000)%60);
-        passedTimeHour = Math.floor(((((passedTime/59)/60)/1000)%1000)%60);
-
-        if(passedTimeMillisecond < 10){
-            passedTimeMillisecond = "00"+passedTimeMillisecond;
-        } else if(passedTimeMillisecond < 100){
-            passedTimeMillisecond = "0"+passedTimeMillisecond;
-        } 
-
-        if(passedTimeSecond < 10){
-            passedTimeSecond = "0"+passedTimeSecond;
-        } 
-        if(passedTimeMinute < 10){
-            passedTimeMinute = "0"+passedTimeMinute;
-        } 
-        if(passedTimeHour < 10){
-            passedTimeHour = "0"+passedTimeHour;
-        } 
-
-        stopWatchDisplayElement.textContent = passedTimeHour+":"+passedTimeMinute+":"+passedTimeSecond+"."+passedTimeMillisecond;
+        stopWatchText(passedTime);
     },1);
+});
+
+splitButtonElement.addEventListener('click', () => {
+    PrintLog("Splitted at ");
 });
 
 resetButtonElement.addEventListener('click', () => {
     clearInterval(timerInterval);
     resetFlag = true;
     passedTimeTemp = 0;
-    stopWatchDisplayElement.textContent = `00:00:00.000`;        
+    stopWatchDisplayElement.textContent = `00:00:00.000`;      
+    logsElement.innerHTML = "";
 });
 
 pauseButtonElement.addEventListener('click', () => {
@@ -91,4 +66,39 @@ pauseButtonElement.addEventListener('click', () => {
         splitButtonElement.disabled = true;
         resetButtonElement.disabled = false; 
     }
+    PrintLog("Paused at ");
 });
+
+const stopWatchText = (passedTime) => {
+    passedTimeMillisecond = passedTime%999;
+    passedTimeSecond = Math.floor((passedTime/999)%1000)%60;
+    passedTimeMinute = Math.floor((((passedTime/59)/1000)%1000)%60);
+    passedTimeHour = Math.floor(((((passedTime/59)/60)/1000)%1000)%60);
+
+    if(passedTimeMillisecond < 10){
+        passedTimeMillisecond = "00"+passedTimeMillisecond;
+    } else if(passedTimeMillisecond < 100){
+        passedTimeMillisecond = "0"+passedTimeMillisecond;
+    } 
+
+    if(passedTimeSecond < 10){
+        passedTimeSecond = "0"+passedTimeSecond;
+    } 
+    if(passedTimeMinute < 10){
+        passedTimeMinute = "0"+passedTimeMinute;
+    } 
+    if(passedTimeHour < 10){
+        passedTimeHour = "0"+passedTimeHour;
+    } 
+
+    stopWatchDisplayElement.textContent = passedTimeHour+":"+passedTimeMinute+":"+passedTimeSecond+"."+passedTimeMillisecond;
+    
+    return (passedTimeHour+":"+passedTimeMinute+":"+passedTimeSecond+"."+passedTimeMillisecond);
+}
+
+const PrintLog = (text) => {
+    const line = logsElement.insertRow(0);
+    const cell = line.insertCell(0);
+
+    cell.innerHTML = text + stopWatchText(passedTime);
+}

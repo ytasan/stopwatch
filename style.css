@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 
-/* https://radiatingstar.com/blog/distribute-divs-images-equaly-line/
-
-https://www.google.com/search?q=css+separate+items+horizontal&biw=1920&bih=927&sxsrf=ALiCzsYRorH-JedOgAlAABvymfTBJXPt1g%3A1658340699687&ei=W0XYYu6aKda8xc8PquG6oAo&ved=0ahUKEwiutMjCiIj5AhVWXvEDHaqwDqQQ4dUDCA0&uact=5&oq=css+separate+items+horizontal&gs_lcp=Cgdnd3Mtd2l6EAMyBAghEBU6BwgAEEcQsAM6BwgjELACECc6BAgjECdKBAhBGABKBAhGGABQhg5YoiJgnjRoAXABeACAAbACiAHVCpIBBzAuOC4wLjGYAQCgAQHIAQi4AQPAAQE&sclient=gws-wiz */
-
-
 body {
     font-family: 'Press Start 2P';
     color: #eee;
@@ -30,24 +25,14 @@ body {
 #buttonContainer{
     margin: auto;
     width: 50%;
-    /* border: 3px solid green; */
-    /* padding: auto; */
-    /* display: flex; */
-
-    /* width: 30%; */
-
 }
 
-#startButton {
-  
-}
-
-#splitButton {
-
-}
-
-#resetButton {
-  
+.logs {
+    text-align: left;    
+    width: 50%;
+    font-size: 80%;
+    margin: auto;
+    padding-top: 20px;
 }
 
 hr{
