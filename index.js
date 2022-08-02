@@ -53,6 +53,7 @@ resetButtonElement.addEventListener('click', () => {
     passedTimeTemp = 0;
     stopWatchDisplayElement.textContent = `00:00:00.000`;      
     logsElement.innerHTML = "";
+    resetButtonElement.disabled = true;
 });
 
 pauseButtonElement.addEventListener('click', () => {
@@ -70,10 +71,10 @@ pauseButtonElement.addEventListener('click', () => {
 });
 
 const stopWatchText = (passedTime) => {
-    passedTimeMillisecond = passedTime%999;
-    passedTimeSecond = Math.floor((passedTime/999)%1000)%60;
-    passedTimeMinute = Math.floor((((passedTime/59)/1000)%1000)%60);
-    passedTimeHour = Math.floor(((((passedTime/59)/60)/1000)%1000)%60);
+    passedTimeMillisecond = passedTime%1000;
+    passedTimeSecond = Math.floor((passedTime/1000)%1000)%60;
+    passedTimeMinute = Math.floor((((passedTime/60)/1000)%1000)%60);
+    passedTimeHour = Math.floor(((((passedTime/60)/60)/1000)%1000)%60);
 
     if(passedTimeMillisecond < 10){
         passedTimeMillisecond = "00"+passedTimeMillisecond;
